@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Form Test - Hit-X Coding</title>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .test-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .email-setup {
+      background: #e3f2fd;
+      border: 1px solid #2196f3;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+
+    .email-setup input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin: 10px 0;
+    }
+
+    .email-setup button {
+      background: #2196f3;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .current-email {
+      background: #e8f5e8;
+      border: 1px solid #4caf50;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    /* Contact Form Styles */
+    .contact-form-container {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      margin: 0 auto;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .form-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .form-title {
+      color: #1a1a1a;
+      font-size: 28px;
+      font-weight: 600;
+      margin: 0 0 10px 0;
+    }
+
+    .form-subtitle {
+      color: #666666;
+      font-size: 16px;
+      margin: 0;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-group {
+      position: relative;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid #e1e5e9;
+      border-radius: 8px;
+      font-size: 16px;
+      font-family: inherit;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .submit-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .email-warning {
+      background: #fff3cd;
+      border: 1px solid #ffeaa7;
+      color: #856404;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+      text-align: center;
+      font-size: 14px;
+      display: none;
+    }
+
+    .console-log {
+      background: #f5f5f5;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+      font-family: monospace;
+      font-size: 12px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="test-container">
+    <h1>Contact Form Test - Hit-X Coding</h1>
+
+    <div class="email-setup">
+      <h3>Set Your Contact Email</h3>
+      <p>This email will receive form submissions from the contact form below.</p>
+      <input type="email" id="contactEmailInput" placeholder="your-email@example.com">
+      <button onclick="setContactEmail()">Set Contact Email</button>
+    </div>
+
+    <div class="current-email" id="currentEmailDisplay">
+      <strong>Current Contact Email:</strong> <span id="emailDisplay">Not set</span>
+    </div>
+
+    <!-- Contact Form -->
+    <div class="contact-form-container">
+      <div class="form-header">
+        <h2 class="form-title">Get In Touch</h2>
+        <p class="form-subtitle">We'd love to hear from you. Send us a message!</p>
+      </div>
+
+      <form class="contact-form">
+        <div class="form-group">
+          <input type="text" name="fullName" placeholder="Full Name" required>
+        </div>
+
+        <div class="form-group">
+          <input type="email" name="email" placeholder="Email Address" required>
+        </div>
+
+        <div class="form-group">
+          <input type="text" name="subject" placeholder="Subject" required>
+        </div>
+
+        <div class="form-group">
+          <textarea name="message" placeholder="Your Message" required rows="5"></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+
+      <div class="email-warning" id="emailWarning">
+        ⚠️ Please set your contact email above to receive form submissions.
+      </div>
+    </div>
+
+    <div class="console-log" id="consoleLog">
+      <strong>Console Log:</strong><br>
+      <div id="logContent"></div>
+    </div>
+  </div>
+
+  <script>
+    // Load current email on page load
+    document.addEventListener('DOMContentLoaded', function () {
+      updateEmailDisplay();
+    });
+
+    function setContactEmail() {
+      const email = document.getElementById('contactEmailInput').value;
+      if (email && email.includes('@')) {
+        localStorage.setItem('userContactEmail', email);
+        updateEmailDisplay();
+        logMessage(`Contact email set to: ${email}`);
+        document.getElementById('contactEmailInput').value = '';
+      } else {
+        alert('Please enter a valid email address');
+      }
+    }
+
+    function updateEmailDisplay() {
+      const email = localStorage.getItem('userContactEmail');
+      const display = document.getElementById('emailDisplay');
+      const warning = document.getElementById('emailWarning');
+
+      if (email) {
+        display.textContent = email;
+        warning.style.display = 'none';
+      } else {
+        display.textContent = 'Not set';
+        warning.style.display = 'block';
+      }
+    }
+
+    function logMessage(message) {
+      const logContent = document.getElementById('logContent');
+      const timestamp = new Date().toLocaleTimeString();
+      logContent.innerHTML += `[${timestamp}] ${message}<br>`;
+      logContent.scrollTop = logContent.scrollHeight;
+    }
+
+    // Contact Form submission handling
+    document.querySelector('.contact-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Get user contact email from localStorage
+      const userContactEmail = localStorage.getItem('userContactEmail');
+
+      if (!userContactEmail) {
+        document.getElementById('emailWarning').style.display = 'block';
+        alert('Please set your contact email first!');
+        return;
+      }
+
+      // Hide warning if email is set
+      document.getElementById('emailWarning').style.display = 'none';
+
+      // Get form data
+      const formData = new FormData(this);
+      const fullName = formData.get('fullName');
+      const email = formData.get('email');
+      const subject = formData.get('subject');
+      const message = formData.get('message');
+
+      // Validate form data
+      if (!fullName || !email || !subject || !message) {
+        alert('Please fill in all fields!');
+        return;
+      }
+
+      // Validate email format
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert('Please enter a valid email address!');
+        return;
+      }
+
+      // Show loading state
+      const submitBtn = this.querySelector('.submit-btn');
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Sending...';
+      submitBtn.disabled = true;
+
+      // Simulate email sending
+      setTimeout(() => {
+        // Log the submission
+        const submissionData = {
+          from: { name: fullName, email: email },
+          subject: subject,
+          message: message,
+          to: userContactEmail,
+          timestamp: new Date().toISOString()
+        };
+
+        logMessage('Contact Form Submission:');
+        logMessage(`From: ${fullName} (${email})`);
+        logMessage(`Subject: ${subject}`);
+        logMessage(`Message: ${message}`);
+        logMessage(`To: ${userContactEmail}`);
+        logMessage('---');
+
+        alert('Thank you for your message! We\'ll get back to you soon.');
+        this.reset();
+
+        // Reset button state
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }, 1500);
+    });
+  </script>
+</body>
+
+</html>

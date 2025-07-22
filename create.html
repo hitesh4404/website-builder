@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hit-X Coding - Website Builder</title>
+  <link rel="stylesheet" href="create.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Top Navbar -->
+  <nav class="top-navbar">
+    <div class="nav-left">
+      <div class="logo">
+        <span class="logo-text">Hit-X Coding</span>
+      </div>
+      <div class="page-selector">
+        <select id="pageSelector" class="page-select" title="Select Page">
+          <option value="home">Home</option>
+        </select>
+        <button class="add-page-btn" id="addPageBtn" title="Add New Page">+</button>
+      </div>
+    </div>
+
+    <div class="nav-center">
+      <div class="global-controls">
+        <div class="control-group">
+          <label>Global Size</label>
+          <div class="size-controls">
+            <button id="decreaseSize" class="size-btn" title="Decrease Font Size">A-</button>
+            <span id="currentSize">16px</span>
+            <button id="increaseSize" class="size-btn" title="Increase Font Size">A+</button>
+          </div>
+        </div>
+        <div class="control-group">
+          <label>Theme</label>
+          <select id="globalTheme" class="global-select" title="Select Theme">
+            <option value="default">Default</option>
+            <option value="dark">Dark</option>
+            <option value="minimal">Minimal</option>
+            <option value="colorful">Colorful</option>
+          </select>
+        </div>
+        <button id="themeToggle" class="theme-toggle" title="Toggle Dark/Light Mode">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z" />
+          </svg>
+        </button>
+      </div>
+      <div class="view-controls">
+        <button class="view-btn active" data-view="desktop" title="Desktop View">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7l-2 3v1h8v-1l-2-3h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 12H3V4h18v10z" />
+        </button>
+        <button class="view-btn" data-view="tablet" title="Tablet View">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M19 0H5C3.9 0 3 .9 3 2v20c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V2c0-1.1-.9-2-2-2zm-7 23c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm7-4H5V3h14v16z" />
+        </button>
+        <button class="view-btn" data-view="mobile" title="Mobile View">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z" />
+        </button>
+      </div>
+    </div>
+
+    <div class="nav-right">
+      <button class="nav-btn" id="undoBtn" title="Undo (Ctrl+Z)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z" />
+        </svg>
+        Undo
+      </button>
+      <button class="nav-btn" id="redoBtn" title="Redo (Ctrl+Y)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M18.4 10.6C16.55 8.99 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22L3.9 16c1.05-3.19 4.05-5.5 7.6-5.5 1.95 0 3.73.72 5.12 1.88L13 16h9V7l-3.6 3.6z" />
+        </svg>
+        Redo
+      </button>
+      <button class="nav-btn" id="saveBtn" title="Save Project">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm2 16H5V5h11.17L19 7.83V19zm-7-7c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+        </svg>
+        Save
+      </button>
+      <button class="nav-btn" id="loadBtn" title="Load Project">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+        </svg>
+        Load
+      </button>
+      <button class="nav-btn primary" id="exportBtn" title="Export Website">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+        </svg>
+        Export
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- Main Builder Interface -->
+  <div class="builder-container">
+    <!-- Left Sidebar - Elements Panel -->
+    <aside class="sidebar left-sidebar" id="elementsPanel">
+      <div class="sidebar-header">
+        <h3>Elements</h3>
+        <button class="sidebar-toggle" id="leftSidebarToggle" title="Toggle Sidebar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="elements-category">
+          <h4>Basic Elements</h4>
+          <div class="elements-grid">
+            <div class="element-item" data-element="heading" draggable="true">
+              <div class="element-icon">H</div>
+              <span>Heading</span>
+            </div>
+            <div class="element-item" data-element="text" draggable="true">
+              <div class="element-icon">T</div>
+              <span>Text</span>
+            </div>
+            <div class="element-item" data-element="button" draggable="true">
+              <div class="element-icon">B</div>
+              <span>Button</span>
+            </div>
+            <div class="element-item" data-element="image" draggable="true">
+              <div class="element-icon">🖼️</div>
+              <span>Image</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="elements-category">
+          <h4>Layout Elements</h4>
+          <div class="elements-grid">
+            <div class="element-item" data-element="container" draggable="true">
+              <div class="element-icon">📦</div>
+              <span>Container</span>
+            </div>
+            <div class="element-item" data-element="section" draggable="true">
+              <div class="element-icon">📄</div>
+              <span>Section</span>
+            </div>
+            <div class="element-item" data-element="divider" draggable="true">
+              <div class="element-icon">➖</div>
+              <span>Divider</span>
+            </div>
+            <div class="element-item" data-element="spacer" draggable="true">
+              <div class="element-icon">⬜</div>
+              <span>Spacer</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="elements-category">
+          <h4>Interactive Elements</h4>
+          <div class="elements-grid">
+            <div class="element-item" data-element="form" draggable="true">
+              <div class="element-icon">📝</div>
+              <span>Contact Form</span>
+            </div>
+            <div class="element-item" data-element="video" draggable="true">
+              <div class="element-icon">🎥</div>
+              <span>Video</span>
+            </div>
+            <div class="element-item" data-element="map" draggable="true">
+              <div class="element-icon">🗺️</div>
+              <span>Map</span>
+            </div>
+            <div class="element-item" data-element="social" draggable="true">
+              <div class="element-icon">🔗</div>
+              <span>Social Links</span>
+            </div>
+            <div class="element-item" data-element="link" draggable="true">
+              <div class="element-icon">🔗</div>
+              <span>Link</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Canvas -->
+    <main class="canvas-container">
+      <div class="canvas-wrapper">
+        <div class="canvas" id="canvas">
+          <div class="canvas-inner" id="canvasInner">
+            <!-- Canvas content will be dynamically added here -->
+            <div class="canvas-placeholder">
+              <div class="placeholder-icon">🎨</div>
+              <h3>Start Building Your Website</h3>
+              <p>Drag elements from the left sidebar to begin creating your website</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Right Sidebar - Layer Panel -->
+    <aside class="sidebar right-sidebar" id="layerPanel">
+      <div class="sidebar-header">
+        <h3>Layers <span class="layer-count" id="layerCount">0</span></h3>
+        <button class="sidebar-toggle" id="rightSidebarToggle" title="Toggle Sidebar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="layer-controls">
+          <button class="layer-btn" id="expandAllLayers" title="Expand All Layers">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M7 14l5-5 5 5z" />
+            </svg>
+          </button>
+          <button class="layer-btn" id="collapseAllLayers" title="Collapse All Layers">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M7 10l5 5 5-5z" />
+            </svg>
+          </button>
+          <button class="layer-btn" id="selectAllLayers" title="Select All Layers">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="layer-list" id="layerList">
+          <!-- Layers will be dynamically generated here -->
+          <div class="layer-empty-state">
+            <div class="empty-icon">📄</div>
+            <p>No layers yet</p>
+            <span>Add elements to see them here</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Floating Editing Toolbar -->
+  <div class="floating-toolbar" id="floatingToolbar">
+    <div class="toolbar-header">
+      <span class="toolbar-title">Element Styling</span>
+      <button class="toolbar-close" id="toolbarClose" title="Close Toolbar">×</button>
+    </div>
+
+    <div class="toolbar-content">
+      <!-- Text Styling -->
+      <div class="toolbar-section">
+        <h5>Text Styling</h5>
+        <div class="toolbar-controls">
+          <div class="control-group">
+            <label>Text Color</label>
+            <input type="color" id="toolbarTextColor" value="#000000" title="Choose Text Color">
+          </div>
+          <div class="control-group">
+            <label>Font Family</label>
+            <select id="toolbarFontFamily" title="Choose Font Family">
+              <option value="Arial, sans-serif">Arial</option>
+              <option value="Helvetica, sans-serif">Helvetica</option>
+              <option value="Inter, sans-serif">Inter</option>
+              <option value="Roboto, sans-serif">Roboto</option>
+              <option value="Open Sans, sans-serif">Open Sans</option>
+              <option value="Poppins, sans-serif">Poppins</option>
+            </select>
+          </div>
+          <div class="control-group">
+            <label>Font Size</label>
+            <div class="size-controls">
+              <button id="toolbarDecreaseSize" class="size-btn" title="Decrease Size">-</button>
+              <input type="number" id="toolbarFontSize" value="24" min="8" max="72" title="Font Size">
+              <button id="toolbarIncreaseSize" class="size-btn" title="Increase Size">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Text Alignment -->
+      <div class="toolbar-section">
+        <h5>Alignment</h5>
+        <div class="alignment-controls">
+          <button class="align-btn" data-align="left" title="Align Left">⫷</button>
+          <button class="align-btn" data-align="center" title="Align Center">⫸⫷</button>
+          <button class="align-btn" data-align="right" title="Align Right">⫸</button>
+          <button class="align-btn" data-align="justify" title="Justify">⫸⫷⫸</button>
+        </div>
+      </div>
+
+      <!-- Font Style -->
+      <div class="toolbar-section">
+        <h5>Font Style</h5>
+        <div class="style-controls">
+          <button class="style-btn" data-style="bold" title="Bold">B</button>
+          <button class="style-btn" data-style="italic" title="Italic">I</button>
+          <button class="style-btn" data-style="underline" title="Underline">U</button>
+        </div>
+      </div>
+
+      <!-- Background & Border -->
+      <div class="toolbar-section">
+        <h5>Background & Border</h5>
+        <div class="toolbar-controls">
+          <div class="control-group">
+            <label>Background Color</label>
+            <input type="color" id="toolbarBgColor" value="#ffffff" title="Choose Background Color">
+          </div>
+          <div class="control-group">
+            <label>Border Radius</label>
+            <input type="range" id="toolbarBorderRadius" min="0" max="20" value="0" title="Border Radius">
+            <span class="range-value">0px</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Spacing -->
+      <div class="toolbar-section">
+        <h5>Spacing</h5>
+        <div class="toolbar-controls">
+          <div class="control-group">
+            <label>Padding</label>
+            <input type="range" id="toolbarPadding" min="0" max="50" value="0" title="Padding">
+            <span class="range-value">0px</span>
+          </div>
+          <div class="control-group">
+            <label>Margin</label>
+            <input type="range" id="toolbarMargin" min="0" max="50" value="0" title="Margin">
+            <span class="range-value">0px</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="toolbar-section">
+        <h5>Actions</h5>
+        <div class="action-controls">
+          <button class="action-btn" id="toolbarDuplicate" title="Duplicate Element">📋</button>
+          <button class="action-btn" id="toolbarDelete" title="Delete Element">🗑️</button>
+          <button class="action-btn" id="toolbarLink" title="Add Link">🔗</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Action Button -->
+  <div class="fab" id="fab">
+    <button class="fab-main" id="fabMain" title="Quick Actions">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+      </svg>
+    </button>
+    <div class="fab-menu" id="fabMenu">
+      <button class="fab-item" data-action="save" title="Save">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm2 16H5V5h11.17L19 7.83V19zm-7-7c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+        </svg>
+      </button>
+      <button class="fab-item" data-action="export" title="Export">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+        </svg>
+      </button>
+
+      <button class="fab-item" data-action="layers" title="Layers">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Layer Panel (Toggleable) -->
+  <div class="layer-panel" id="layerPanel">
+    <div class="layer-header">
+      <h3>Layers</h3>
+      <button class="layer-toggle" id="layerToggle" title="Toggle Layer Panel">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19 13H5v-2h14v2z" />
+        </svg>
+      </button>
+    </div>
+    <div class="layer-content">
+      <div class="layer-list" id="layerList">
+        <!-- Layers will be dynamically added here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden file inputs -->
+  <input type="file" id="loadFileInput" accept=".json" style="display: none;">
+  <input type="file" id="imageUploadInput" accept="image/*" style="display: none;">
+  <input type="file" id="videoUploadInput" accept="video/*" style="display: none;">
+
+  <!-- Modals -->
+  <div class="modal" id="addPageModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Add New Page</h3>
+        <button class="modal-close" id="closeAddPageModal" title="Close Modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="newPageName">Page Name</label>
+          <input type="text" id="newPageName" placeholder="e.g., About, Contact, Services" required>
+        </div>
+        <div class="form-group">
+          <label for="newPageTemplate">Template</label>
+          <select id="newPageTemplate">
+            <option value="blank">Blank Page</option>
+            <option value="hero">Hero Section</option>
+            <option value="contact">Contact Page</option>
+            <option value="about">About Page</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="cancelAddPage">Cancel</button>
+        <button class="btn btn-primary" id="confirmAddPage">Add Page</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Export Options Modal -->
+  <div class="modal" id="exportModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Export Website</h3>
+        <button class="modal-close" id="closeExportModal" title="Close Modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="export-options">
+          <div class="export-option" data-export="zip">
+            <div class="export-icon">📦</div>
+            <div class="export-info">
+              <h4>ZIP Package</h4>
+              <p>Download as a complete website package</p>
+            </div>
+          </div>
+          <div class="export-option" data-export="html">
+            <div class="export-icon">📄</div>
+            <div class="export-info">
+              <h4>Single HTML</h4>
+              <p>All-in-one HTML file with embedded CSS</p>
+            </div>
+          </div>
+          <div class="export-option" data-export="separate">
+            <div class="export-icon">📁</div>
+            <div class="export-info">
+              <h4>Separate Files</h4>
+              <p>HTML, CSS, and JS as individual files</p>
+            </div>
+          </div>
+        </div>
+        <div class="export-settings">
+          <div class="form-group">
+            <label>
+              <input type="checkbox" id="includeAssets" checked>
+              Include assets and dependencies
+            </label>
+          </div>
+          <div class="form-group">
+            <label>
+              <input type="checkbox" id="minifyCode">
+              Minify code for production
+            </label>
+          </div>
+          <div class="form-group">
+            <label>
+              <input type="checkbox" id="addComments" checked>
+              Include comments and documentation
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="cancelExport">Cancel</button>
+        <button class="btn btn-primary" id="confirmExport">Export Website</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form Configuration Modal -->
+  <div class="modal" id="formConfigModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Configure Contact Form</h3>
+        <button class="modal-close" id="closeFormConfigModal" title="Close Modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="formTitle">Form Title</label>
+          <input type="text" id="formTitle" placeholder="e.g., Contact Us, Get in Touch" required>
+        </div>
+        <div class="form-group">
+          <label for="formEmail">Email Address</label>
+          <input type="email" id="formEmail" placeholder="your-email@example.com" required>
+          <small>Form submissions will be sent to this email address</small>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="cancelFormConfig">Cancel</button>
+        <button class="btn btn-primary" id="saveFormConfig">Save Configuration</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="create.js"></script>
+</body>
+
+</html>

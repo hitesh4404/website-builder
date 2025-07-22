@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Form Admin Email Setup Guide</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      color: #1a1a1a;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .header p {
+      color: #666;
+      font-size: 1.1rem;
+    }
+
+    .step {
+      background: #f8f9fa;
+      border-left: 4px solid #667eea;
+      padding: 25px;
+      margin-bottom: 30px;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .step h3 {
+      color: #1a1a1a;
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+    }
+
+    .step-number {
+      background: #667eea;
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .highlight {
+      background: #fff3cd;
+      border: 1px solid #ffeaa7;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 15px 0;
+    }
+
+    .contact-form-container {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      margin: 30px auto;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .form-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .form-title {
+      color: #1a1a1a;
+      font-size: 28px;
+      font-weight: 600;
+      margin: 0 0 10px 0;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid #e1e5e9;
+      border-radius: 8px;
+      font-size: 16px;
+      font-family: inherit;
+      transition: border-color 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      outline: none;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .submit-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    }
+
+    .email-warning {
+      display: none;
+      background: #fff3cd;
+      border: 1px solid #ffeaa7;
+      color: #856404;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .admin-email-section {
+      background: #e8f5e8;
+      border: 2px solid #c3e6c3;
+      border-radius: 12px;
+      padding: 30px;
+      margin: 30px 0;
+    }
+
+    .admin-email-section h3 {
+      color: #155724;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+
+    .email-input-group {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .email-input-group input {
+      flex: 1;
+      min-width: 300px;
+      padding: 12px 16px;
+      border: 2px solid #e1e5e9;
+      border-radius: 8px;
+      font-size: 16px;
+      font-family: inherit;
+    }
+
+    .email-input-group button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .email-input-group button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    }
+
+    .current-email {
+      margin-top: 15px;
+      padding: 15px;
+      background: #d4edda;
+      border: 1px solid #c3e6c3;
+      border-radius: 8px;
+      color: #155724;
+    }
+
+    .warning {
+      margin-top: 15px;
+      padding: 15px;
+      background: #f8d7da;
+      border: 1px solid #f5c6cb;
+      border-radius: 8px;
+      color: #721c24;
+    }
+
+    .console-log {
+      background: #1a1a1a;
+      color: #00ff88;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 30px;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .console-log h4 {
+      color: #ffffff;
+      margin-bottom: 15px;
+    }
+
+    .log-entry {
+      margin-bottom: 10px;
+      padding: 8px;
+      background: #2a2a2a;
+      border-radius: 4px;
+    }
+
+    .success {
+      color: #00ff88;
+    }
+
+    .error {
+      color: #ff6b6b;
+    }
+
+    .info {
+      color: #4ecdc4;
+    }
+
+    .note {
+      background: #e3f2fd;
+      border: 1px solid #bbdefb;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    .note h4 {
+      color: #1976d2;
+      margin-bottom: 10px;
+    }
+
+    .note p {
+      color: #424242;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>📧 Contact Form Admin Email Setup</h1>
+      <p>Step-by-step guide on where to add your admin email</p>
+    </div>
+
+    <!-- Step 1 -->
+    <div class="step">
+      <h3><span class="step-number">1</span>Add Contact Form to Your Page</h3>
+      <p>In the Hit-X Coding builder:</p>
+      <ul style="margin-left: 20px; margin-top: 10px;">
+        <li>Drag and drop the <strong>Contact Form</strong> element from the elements panel</li>
+        <li>Place it on your page where you want the form to appear</li>
+      </ul>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step">
+      <h3><span class="step-number">2</span>Select the Contact Form Element</h3>
+      <p>Click on the contact form you just added to select it. You'll see the edit panel appear on the right side.</p>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step">
+      <h3><span class="step-number">3</span>Find the Admin Email Field</h3>
+      <p>In the <strong>Edit Panel</strong> (right sidebar), look for:</p>
+      <div class="highlight">
+        <strong>🔧 Admin Email:</strong> This is where you enter your email address to receive contact form submissions
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="step">
+      <h3><span class="step-number">4</span>Enter Your Email Address</h3>
+      <p>Type your email address in the Admin Email field. This is where all contact form submissions will be sent.</p>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="step">
+      <h3><span class="step-number">5</span>Save and Test</h3>
+      <p>Click save in the edit panel, then test your form by filling it out and clicking submit.</p>
+    </div>
+
+    <!-- Admin Email Setup Section -->
+    <div class="admin-email-section">
+      <h3>🔧 Set Admin Email for This Demo Form</h3>
+      <div class="email-input-group">
+        <input type="email" id="adminEmailInput" placeholder="Your Email to Receive Contact Form Submissions">
+        <button onclick="setAdminEmail()">Save Admin Email</button>
+      </div>
+      <div id="currentEmailDisplay" class="current-email" style="display: none;">
+        <strong>✅ Admin Email Set:</strong> <span id="currentEmailText"></span>
+      </div>
+      <div id="emailWarning" class="warning" style="display: none;">
+        ⚠️ No admin email set. Contact form submissions will show a warning.
+      </div>
+    </div>
+
+    <!-- Contact Form Element -->
+    <div class="contact-form-container" id="contact-form-element-1">
+      <div class="form-header">
+        <h2 class="form-title">Get In Touch</h2>
+      </div>
+
+      <form class="contact-form">
+        <div class="form-group">
+          <input type="text" name="fullName" placeholder="Full Name" required>
+        </div>
+
+        <div class="form-group">
+          <input type="email" name="email" placeholder="Email Address" required>
+        </div>
+
+        <div class="form-group">
+          <textarea name="message" placeholder="Your Message" required rows="5"></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+
+      <div class="email-warning">
+        ⚠️ Please attach your admin email to this contact form using the Edit Panel.
+      </div>
+    </div>
+
+    <!-- Console Log Section -->
+    <div class="console-log">
+      <h4>📋 Form Submission Log</h4>
+      <div id="logContainer"></div>
+    </div>
+
+    <!-- Note Section -->
+    <div class="note">
+      <h4>📝 Important Notes</h4>
+      <p><strong>Admin Email Location:</strong> In the Edit Panel when you select the Contact Form element</p>
+      <p><strong>Storage:</strong> Admin email is saved per contact form instance</p>
+      <p><strong>Required:</strong> You must set an admin email for the form to work properly</p>
+      <p><strong>Testing:</strong> Use the form above to test your admin email setup</p>
+    </div>
+  </div>
+
+  <script>
+    // Admin Email Management
+    function setAdminEmail() {
+      const emailInput = document.getElementById('adminEmailInput');
+      const email = emailInput.value.trim();
+
+      if (!email) {
+        addLog('Please enter a valid email address', 'error');
+        return;
+      }
+
+      // Validate email format
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        addLog('Please enter a valid email address', 'error');
+        return;
+      }
+
+      // Save to localStorage for this specific form element
+      const elementId = 'contact-form-element-1';
+      localStorage.setItem(`contactFormEmail_${elementId}`, email);
+
+      addLog(`Admin email set: ${email}`, 'success');
+      updateEmailDisplay();
+    }
+
+    function updateEmailDisplay() {
+      const elementId = 'contact-form-element-1';
+      const adminEmail = localStorage.getItem(`contactFormEmail_${elementId}`);
+      const currentEmailDisplay = document.getElementById('currentEmailDisplay');
+      const currentEmailText = document.getElementById('currentEmailText');
+      const emailWarning = document.getElementById('emailWarning');
+
+      if (adminEmail) {
+        currentEmailText.textContent = adminEmail;
+        currentEmailDisplay.style.display = 'block';
+        emailWarning.style.display = 'none';
+      } else {
+        currentEmailDisplay.style.display = 'none';
+        emailWarning.style.display = 'block';
+      }
+    }
+
+    // Contact Form Submission Handler
+    document.querySelector('.contact-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const warningDiv = document.querySelector('.email-warning');
+
+      // Get admin email from localStorage for this specific form element
+      const elementId = 'contact-form-element-1';
+      const adminEmail = localStorage.getItem(`contactFormEmail_${elementId}`);
+
+      if (!adminEmail) {
+        // Show warning if no admin email is attached
+        warningDiv.style.display = 'block';
+        addLog('No admin email set. Please set admin email first.', 'error');
+        return;
+      }
+
+      // Hide warning if email is set
+      warningDiv.style.display = 'none';
+
+      // Get form data
+      const formData = new FormData(form);
+      const fullName = formData.get('fullName');
+      const email = formData.get('email');
+      const message = formData.get('message');
+
+      // Validate form data
+      if (!fullName || !email || !message) {
+        addLog('Please fill in all fields!', 'error');
+        return;
+      }
+
+      // Validate email format
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        addLog('Please enter a valid email address!', 'error');
+        return;
+      }
+
+      // Show loading state
+      const submitBtn = form.querySelector('.submit-btn');
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Sending...';
+      submitBtn.disabled = true;
+      submitBtn.style.opacity = '0.7';
+
+      // Simulate email sending with detailed logging
+      setTimeout(() => {
+        // Create email content for logging
+        const emailContent = `
+                    New Contact Form Submission
+                    
+                    From: ${fullName} (${email})
+                    Message: ${message}
+                    
+                    Sent to: ${adminEmail}
+                    Date: ${new Date().toLocaleString()}
+                `;
+
+        // Log the submission details
+        console.log('Contact Form Submission:', {
+          from: { name: fullName, email: email },
+          message: message,
+          to: adminEmail,
+          timestamp: new Date().toISOString()
+        });
+
+        addLog(`✅ Form submitted successfully!`, 'success');
+        addLog(`📧 From: ${fullName} (${email})`, 'info');
+        addLog(`💬 Message: ${message}`, 'info');
+        addLog(`📬 Sent to: ${adminEmail}`, 'info');
+
+        // Show success message
+        alert('Thank you for contacting us! We\'ll get back to you soon.');
+
+        // Reset form
+        form.reset();
+
+        // Reset button state
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = '1';
+      }, 1500); // Simulate network delay
+    });
+
+    // Logging function
+    function addLog(message, type = 'info') {
+      const logContainer = document.getElementById('logContainer');
+      const logEntry = document.createElement('div');
+      logEntry.className = `log-entry ${type}`;
+      logEntry.innerHTML = `[${new Date().toLocaleTimeString()}] ${message}`;
+      logContainer.appendChild(logEntry);
+      logContainer.scrollTop = logContainer.scrollHeight;
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function () {
+      updateEmailDisplay();
+      addLog('Contact form setup guide loaded', 'info');
+      addLog('Follow the steps above to set up admin email', 'info');
+    });
+  </script>
+</body>
+
+</html>

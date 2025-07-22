@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Element Test - Hit-X Coding</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      color: #1a1a1a;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .header p {
+      color: #666;
+      font-size: 1.1rem;
+    }
+
+    .test-section {
+      background: #f8f9fa;
+      border: 2px solid #e9ecef;
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+
+    .test-section h3 {
+      color: #1a1a1a;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+
+    .video-element {
+      width: 400px;
+      height: 300px;
+      background: #f0f0f0;
+      border: 2px dashed #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      flex-direction: column;
+      gap: 10px;
+      margin: 20px auto;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-radius: 8px;
+    }
+
+    .video-element:hover {
+      border-color: #667eea;
+      background: #f8f9fa;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+    }
+
+    .video-element .icon {
+      font-size: 2rem;
+    }
+
+    .video-element .text {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .uploaded-video {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .instructions {
+      background: #e3f2fd;
+      border: 1px solid #bbdefb;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    .instructions h4 {
+      color: #1976d2;
+      margin-bottom: 15px;
+    }
+
+    .instructions ol {
+      color: #424242;
+      margin-left: 20px;
+    }
+
+    .instructions li {
+      margin-bottom: 8px;
+    }
+
+    .console-log {
+      background: #1a1a1a;
+      color: #00ff88;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 30px;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .console-log h4 {
+      color: #ffffff;
+      margin-bottom: 15px;
+    }
+
+    .log-entry {
+      margin-bottom: 10px;
+      padding: 8px;
+      background: #2a2a2a;
+      border-radius: 4px;
+    }
+
+    .success {
+      color: #00ff88;
+    }
+
+    .info {
+      color: #4ecdc4;
+    }
+
+    .note {
+      background: #fff3cd;
+      border: 1px solid #ffeaa7;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    .note h4 {
+      color: #856404;
+      margin-bottom: 10px;
+    }
+
+    .note p {
+      color: #856404;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    /* Hidden file input */
+    #videoUploadInput {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🎥 Video Element Test</h1>
+      <p>Test the video element functionality in Hit-X Coding</p>
+    </div>
+
+    <div class="test-section">
+      <h3>📋 How to Use Video Element</h3>
+      <div class="instructions">
+        <h4>In Hit-X Coding Builder:</h4>
+        <ol>
+          <li><strong>Drag and drop</strong> the Video element from the Elements panel</li>
+          <li><strong>Click on the video placeholder</strong> to upload a video file</li>
+          <li><strong>Select your video file</strong> (MP4, WebM, OGV supported)</li>
+          <li><strong>Video will be embedded</strong> with native HTML5 controls</li>
+          <li><strong>Save your project</strong> - video data is stored in localStorage</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="test-section">
+      <h3>🎬 Test Video Element</h3>
+      <p style="text-align: center; margin-bottom: 20px; color: #666;">
+        Click on the video placeholder below to test the upload functionality
+      </p>
+
+      <div class="video-element" id="testVideoElement">
+        <div class="icon">🎥</div>
+        <div class="text">Click to upload video</div>
+      </div>
+    </div>
+
+    <!-- Console Log Section -->
+    <div class="console-log">
+      <h4>📋 Video Upload Log</h4>
+      <div id="logContainer"></div>
+    </div>
+
+    <!-- Note Section -->
+    <div class="note">
+      <h4>📝 Important Notes</h4>
+      <p><strong>Supported Formats:</strong> MP4, WebM, OGV, and other HTML5 video formats</p>
+      <p><strong>File Size:</strong> Large videos may take time to upload and process</p>
+      <p><strong>Storage:</strong> Videos are stored as base64 data in localStorage</p>
+      <p><strong>Export:</strong> Videos are included in exported websites</p>
+      <p><strong>Controls:</strong> Native HTML5 video controls (play, pause, volume, fullscreen)</p>
+    </div>
+  </div>
+
+  <!-- Hidden file input for video upload -->
+  <input type="file" id="videoUploadInput" accept="video/*">
+
+  <script>
+    // Video upload functionality
+    function uploadVideo(element) {
+      const input = document.getElementById('videoUploadInput');
+      input.click();
+
+      input.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          addLog(`Selected video file: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`, 'info');
+
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            element.innerHTML = `<video controls class="uploaded-video"><source src="${e.target.result}" type="${file.type}">Your browser does not support the video tag.</video>`;
+            addLog(`✅ Video uploaded successfully!`, 'success');
+            addLog(`📹 Video type: ${file.type}`, 'info');
+            addLog(`📏 Video size: ${(file.size / 1024 / 1024).toFixed(2)} MB`, 'info');
+
+            // Add video event listeners for logging
+            const video = element.querySelector('video');
+            video.addEventListener('play', () => addLog(`▶️ Video started playing`, 'info'));
+            video.addEventListener('pause', () => addLog(`⏸️ Video paused`, 'info'));
+            video.addEventListener('ended', () => addLog(`⏹️ Video ended`, 'info'));
+            video.addEventListener('volumechange', () => addLog(`🔊 Volume changed to ${Math.round(video.volume * 100)}%`, 'info'));
+          };
+
+          reader.onerror = () => {
+            addLog(`❌ Error reading video file`, 'error');
+          };
+
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+
+    // Logging function
+    function addLog(message, type = 'info') {
+      const logContainer = document.getElementById('logContainer');
+      const logEntry = document.createElement('div');
+      logEntry.className = `log-entry ${type}`;
+      logEntry.innerHTML = `[${new Date().toLocaleTimeString()}] ${message}`;
+      logContainer.appendChild(logEntry);
+      logContainer.scrollTop = logContainer.scrollHeight;
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function () {
+      addLog('Video element test page loaded', 'info');
+      addLog('Click on the video placeholder to test upload', 'info');
+
+      // Add click handler to test video element
+      const testVideoElement = document.getElementById('testVideoElement');
+      testVideoElement.addEventListener('click', () => uploadVideo(testVideoElement));
+    });
+  </script>
+</body>
+
+</html>
